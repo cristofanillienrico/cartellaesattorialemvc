@@ -31,7 +31,7 @@ public class Contribuente {
     private String cognome;
 
     @NotBlank(message = "{codiceFiscale.notblank}")
-    @Size(min = 16, max = 16, message = "Il valore inserito '${validatedValue}' deve essere lungo tra {min} e {max} caratteri")
+    @Size(min = 16, max = 16, message = "Il valore inserito  deve essere lungo {max} caratteri")
     @Column(name = "codiceFiscale")
     private String codiceFiscale;
 
