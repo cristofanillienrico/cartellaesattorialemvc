@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import it.prova.cartellaesattorialemvc.model.CartellaEsattoriale;
 import it.prova.cartellaesattorialemvc.model.Contribuente;
+import it.prova.cartellaesattorialemvc.model.Stato;
 import it.prova.cartellaesattorialemvc.service.CartellaEsattorialeService;
 import it.prova.cartellaesattorialemvc.service.ContribuenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping(value = "/cartellaesattoriale")
@@ -67,7 +70,9 @@ public class CartellaEsattorialeController {
 
     @GetMapping("/search")
     public String searchCartellaEsattoriale(Model model) {
+        List<String> stati = Stream.of(Stato.values()).map(stato -> stato.name()).collect(Collectors.toList());
         model.addAttribute("contribuenti_list_attribute", contribuenteService.listAllElements());
+        model.addAttribute("stati_list_attribute", stati);
         return "cartellaesattoriale/search";
     }
 

@@ -49,11 +49,9 @@
                         <label for="stato">Stato</label>
                         <select class="form-control" id="stato" name="stato">
                             <option value="">Indifferente</option>
-                            <option value="CREATA">CREATA</option>
-                            <option value="IN_VERIFICA">IN_VERIFICA</option>
-                            <option value="CONCLUSA">CONCLUSA</option>
-                            <option value="IN_CONTENZIOSO">IN_CONTENZIOSO</option>
-                            <option value="CANCELLATA">CANCELLATA</option>
+                            <c:forEach items="${stati_list_attribute}" var="statoItem">
+                                <option value="${statoItem}">${statoItem}</option>
+                            </c:forEach>
                         </select>
                     </div>
 
@@ -74,7 +72,8 @@
                 <button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
                 <input class="btn btn-outline-warning" type="reset" value="Ripulisci">
 
-                <a class="btn btn-outline-primary ml-2" href="${pageContext.request.contextPath }/cartellaesattoriale/insert">Add
+                <a class="btn btn-outline-primary ml-2"
+                   href="${pageContext.request.contextPath }/cartellaesattoriale/insert">Add
                     New</a>
 
             </form>
