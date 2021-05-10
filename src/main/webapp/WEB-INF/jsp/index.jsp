@@ -49,7 +49,7 @@
 	      <div class="col-md-6">
 	        <h2>Gestione Cartelle Esattoriali</h2>
 	        <p>Questa funzionalita  realtiva alla Gestione delle Cartelle Esattoriali</p>
-	        <p><a class="btn btn-primary" href="film/search" role="button">Vai alla Funzionalita &raquo;</a></p>
+	        <p><a class="btn btn-primary" href="${pageContext.request.contextPath}/cartellaesattoriale/search" role="button">Vai alla Funzionalita &raquo;</a></p>
 	      </div>
 	    </div>
 	    
