@@ -48,7 +48,7 @@
             <div class='table-responsive'>
                 <table class='table table-striped '>
                     <thead>
-                    <tr>
+                    <tr >
                         <th>Nome</th>
                         <th>Cognome</th>
                         <th>Indirizzo</th>
@@ -58,7 +58,7 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${contribuenti_list_attribute }" var="contribuenteItem">
-                        <tr>
+                        <tr class=${contribuenteItem.inContensioso()?"table-danger":""}>
                             <td>${contribuenteItem.nome }</td>
                             <td>${contribuenteItem.cognome }</td>
                             <td>${contribuenteItem.indirizzo }</td>

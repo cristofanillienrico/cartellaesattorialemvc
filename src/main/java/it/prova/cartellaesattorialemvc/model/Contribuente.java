@@ -148,4 +148,44 @@ public class Contribuente {
                 ", indirizzo='" + indirizzo + '\'' +
                 '}';
     }
+
+    //METODI ACCESSORI
+    public boolean inContensioso() {
+        boolean check = false;
+        for (CartellaEsattoriale itemCartella : this.cartelleEsattoriali) {
+            if (itemCartella.getStato().equals(Stato.IN_CONTENZIOSO)) {
+                check = true;
+            }
+        }
+        return check;
+
+    }
+
+    public Double sommaImportoTotaleCartelle() {
+        Double sum = 0.0;
+        for (CartellaEsattoriale itemCartella : this.cartelleEsattoriali) {
+            sum += itemCartella.getImporto();
+        }
+        return sum;
+    }
+
+    public Double sommaImportoCartelleConcluse() {
+        Double sum = 0.0;
+        for (CartellaEsattoriale itemCartella : this.cartelleEsattoriali) {
+            if (itemCartella.getStato().equals(Stato.CONCLUSA)) {
+                sum += itemCartella.getImporto();
+            }
+        }
+        return sum;
+    }
+
+    public Double sommaImportoCartelleInContenzioso() {
+        Double sum = 0.0;
+        for (CartellaEsattoriale itemCartella : this.cartelleEsattoriali) {
+            if (itemCartella.getStato().equals(Stato.IN_CONTENZIOSO)) {
+                sum += itemCartella.getImporto();
+            }
+        }
+        return sum;
+    }
 }

@@ -87,7 +87,7 @@ public class ContribuenteController {
 
     @GetMapping("/show/{idContribuente}")
     public String showContribuente(@PathVariable(required = true) Long idContribuente, Model model) {
-        model.addAttribute("show_contribuente_attr", contribuenteService.caricaSingoloElemento(idContribuente));
+        model.addAttribute("show_contribuente_attr", contribuenteService.caricaSingoloElementoConCartelleEsattoriali(idContribuente));
         return "contribuente/show";
     }
 

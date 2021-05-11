@@ -11,5 +11,7 @@ public interface ContribuenteRepository extends CrudRepository<Contribuente, Lon
 
     @Query("from Contribuente c left join fetch c.cartelleEsattoriali where c.id=?1")
     Contribuente caricaSingoloElementoConCartelleEsattoriali(Long id);
+
+
 }
 

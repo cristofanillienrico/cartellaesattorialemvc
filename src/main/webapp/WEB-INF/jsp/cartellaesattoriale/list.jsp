@@ -40,8 +40,8 @@
 		        <h5>Lista dei risultati</h5> 
 		    </div>
 		    <div class='card-body'>
-		    	<a class="btn btn-primary " href="${pageContext.request.contextPath }/cartellaEsattoriale/insert">Add New</a>
-		    	<a href="${pageContext.request.contextPath }/cartellaEsattoriale/search" class='btn btn-outline-secondary' >
+		    	<a class="btn btn-primary " href="${pageContext.request.contextPath }/cartellaesattoriale/insert">Add New</a>
+		    	<a href="${pageContext.request.contextPath }/cartellaesattoriale/search" class='btn btn-outline-secondary' >
 			            <i class='fa fa-chevron-left'></i> Torna alla Ricerca
 			        </a>
 		    
@@ -61,9 +61,9 @@
 									<td>${cartellaEsattorialeItem.importo }</td>
 									<td>${cartellaEsattorialeItem.stato }</td>
 									<td>
-										<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/cartellaEsattoriale/show/${cartellaEsattorialeItem.id }">Visualizza</a>
-										<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/cartellaEsattoriale/edit/${cartellaEsattorialeItem.id }">Edit</a>
-										<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath }/cartellaEsattoriale/delete/${cartellaEsattorialeItem.id }">Delete</a>
+										<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/cartellaesattoriale/show/${cartellaEsattorialeItem.id }">Visualizza</a>
+										<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/cartellaesattoriale/edit/${cartellaEsattorialeItem.id }">Edit</a>
+										<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath }/cartellaesattoriale/delete/${cartellaEsattorialeItem.id }">Delete</a>
 									</td>
 								</tr>
 							</c:forEach>

@@ -44,13 +44,44 @@
             </dl>
 
 
+            <!-- info Cartelle -->
+            <p>
+                <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample" role="button"
+                   aria-expanded="false" aria-controls="collapseExample">
+                    Info Cartelle
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3 text-right">Totale importo Cartelle:</dt>
+                        <dd class="col-sm-9">${show_contribuente_attr.sommaImportoTotaleCartelle()}</dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-3 text-right">Totale concluso e pagato:</dt>
+                        <dd class="col-sm-9">${show_contribuente_attr.sommaImportoCartelleConcluse()}</dd>
+                    </dl>
+                    <c:if test="${show_contribuente_attr.inContensioso()}">
+                        <dl class="row">
+                            <dt class="col-sm-3 text-right text-danger">Totale in contenzioso:</dt>
+                            <dd class="col-sm-9 text-danger">${show_contribuente_attr.sommaImportoCartelleInContenzioso()}</dd>
+                        </dl>
+                    </c:if>
+
+
+                </div>
+            </div>
+            <!-- end info Regista -->
+
+
         </div>
 
 
     </div>
 
     <div class='card-footer'>
-        <a href="${pageContext.request.contextPath }/contribuente/" class='btn btn-outline-secondary' style='width:80px'>
+        <a href="${pageContext.request.contextPath }/contribuente/" class='btn btn-outline-secondary'
+           style='width:80px'>
             <i class='fa fa-chevron-left'></i> Back
         </a>
     </div>
