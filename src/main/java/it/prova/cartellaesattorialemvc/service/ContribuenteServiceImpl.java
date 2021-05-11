@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class ContribuenteServiceImpl implements ContribuenteService{
+public class ContribuenteServiceImpl implements ContribuenteService {
 
     @Autowired
     private ContribuenteRepository contribuenteRepository;
@@ -51,8 +51,7 @@ public class ContribuenteServiceImpl implements ContribuenteService{
 
     @Transactional(readOnly = true)
     public List<Contribuente> cercaByCognomeENomeILike(String term) {
-        System.out.println("da scrivere");
-        return null;
+        return contribuenteRepository.findByCognomeIgnoreCaseContainingOrNomeIgnoreCaseContainingOrderByNomeAsc(term, term);
 
     }
 }

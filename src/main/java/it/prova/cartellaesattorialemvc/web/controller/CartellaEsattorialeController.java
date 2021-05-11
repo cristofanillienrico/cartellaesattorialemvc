@@ -43,7 +43,9 @@ public class CartellaEsattorialeController {
 
     @GetMapping("/insert")
     public String createCartellaEsattoriale(Model model) {
-        model.addAttribute("insert_cartellaEsattoriale_attr", new CartellaEsattoriale());
+        CartellaEsattoriale nuovaCartellaEsattoriale = new CartellaEsattoriale();
+        nuovaCartellaEsattoriale.setStato(Stato.CREATA);
+        model.addAttribute("insert_cartellaEsattoriale_attr", nuovaCartellaEsattoriale);
         return "cartellaesattoriale/insert";
     }
 
@@ -51,13 +53,8 @@ public class CartellaEsattorialeController {
     public String saveCartellaEsattoriale(@Valid @ModelAttribute("insert_cartellaEsattoriale_attr") CartellaEsattoriale cartellaEsattoriale, BindingResult result,
                                           RedirectAttributes redirectAttrs) {
 
-// se il contribuente è valorizzato dobbiamo provare a caricarlo perché
-// ci aiuta in pagina. Altrimenti devo fare rejectValue 'a mano' altrimenti
-// comunque viene fatta una new durante il binding, anche se arriva stringa vuota
-        if (cartellaEsattoriale.getContribuente() != null && cartellaEsattoriale.getContribuente().getId() != null)
-            cartellaEsattoriale.setContribuente(contribuenteService.caricaSingoloElemento(cartellaEsattoriale.getContribuente().getId()));
-        else
-            result.rejectValue("contribuente", "contribuente.notnull");
+
+//        cartellaEsattoriale.setStato(Stato.CREATA);
 
         if (result.hasErrors()) {
             return "cartellaesattoriale/insert";
@@ -89,16 +86,26 @@ public class CartellaEsattorialeController {
         return "cartellaesattoriale/show";
     }
 
-    @GetMapping("/delete/{idCartellaEsattoriale}")
-    public String prepareDeleteCartellaEsattoriale(@PathVariable(required = true) Long idCartellaEsattoriale, Model model) {
-        model.addAttribute("elimina_cartellaEsattoriale_attr", cartellaEsattorialeService.caricaSingoloElemento(idCartellaEsattoriale));
-        return "cartellaesattoriale/delete";
+    @GetMapping("/cambiaStato/{idCartellaEsattoriale}")
+    public String prepareCambiaStatoCartellaEsattoriale(@PathVariable(required = true) Long idCartellaEsattoriale, Model model) {
+        model.addAttribute("cambiaStato_cartellaEsattoriale_attr", cartellaEsattorialeService.caricaSingoloElemento(idCartellaEsattoriale));
+        return "cartellaesattoriale/cambiaStato";
     }
 
-    @PostMapping("/delete/executedelete")
-    public String executeDeleteCartellaEsattoriale(@Valid @ModelAttribute("idCartellaEsattoriale") Long idCartellaEsattoriale, RedirectAttributes redirectAttrs) {
+    @PostMapping("/cambiaStato/executecambiaStato")
+    public String executeCambiaStatoCartellaEsattoriale(@Valid @ModelAttribute("idCartellaEsattoriale") Long idCartellaEsattoriale, RedirectAttributes redirectAttrs) {
 
-        cartellaEsattorialeService.rimuovi(cartellaEsattorialeService.caricaSingoloElementoEager(idCartellaEsattoriale));
+        CartellaEsattoriale cartellaDaCambiareStato = cartellaEsattorialeService.caricaSingoloElementoEager(idCartellaEsattoriale);
+
+        if (cartellaDaCambiareStato.getStato().toString() == "CANCELLATA") {
+            cartellaDaCambiareStato.setStato(Stato.IN_VERIFICA);
+
+        } else {
+            cartellaDaCambiareStato.setStato(Stato.CANCELLATA);
+        }
+
+        cartellaEsattorialeService.aggiorna(cartellaDaCambiareStato);
+
 
         redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 
@@ -108,7 +115,7 @@ public class CartellaEsattorialeController {
 
     @GetMapping("/edit/{idCartellaEsattoriale}")
     public String prepareEditCartellaEsattoriale(@PathVariable(required = true) Long idCartellaEsattoriale, Model model) {
-        model.addAttribute("update_cartellaEsattoriale_attr", cartellaEsattorialeService.caricaSingoloElemento(idCartellaEsattoriale));
+            model.addAttribute("update_cartellaEsattoriale_attr", cartellaEsattorialeService.caricaSingoloElemento(idCartellaEsattoriale));
         return "cartellaesattoriale/edit";
     }
 
