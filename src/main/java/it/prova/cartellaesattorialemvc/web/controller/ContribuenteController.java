@@ -42,7 +42,7 @@ public class ContribuenteController {
 
     @PostMapping("/save")
     public String saveContribuente(@Valid @ModelAttribute("insert_contribuente_attr") Contribuente contribuente, BindingResult result,
-                              RedirectAttributes redirectAttrs) {
+                                   RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
             return "contribuente/insert";
         }
@@ -99,8 +99,14 @@ public class ContribuenteController {
 
     @PostMapping("/delete/executedelete")
     public String executeDeleteContribuente(@Valid @ModelAttribute("idContribuente") Long idContribuente, RedirectAttributes redirectAttrs) {
+        Contribuente contribuenteDaEliminare = contribuenteService.caricaSingoloElementoConCartelleEsattoriali(idContribuente);
+        if (!contribuenteDaEliminare.getCartelleEsattoriali().isEmpty()) {
+            redirectAttrs.addFlashAttribute("errorMessage", "Non posso eliminare contribuente che ha cartelle esattoriali collegate");
 
-        contribuenteService.rimuovi(contribuenteService.caricaSingoloElemento(idContribuente));
+            return "redirect:/contribuente";
+        }
+
+        contribuenteService.rimuovi(contribuenteDaEliminare);
 
         redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 
@@ -115,7 +121,7 @@ public class ContribuenteController {
 
     @PostMapping("/edit/executeedit")
     public String executeEditContribuente(@Valid @ModelAttribute("modifica_contribuente_attr") Contribuente contribuente, BindingResult result,
-                                     RedirectAttributes redirectAttrs) {
+                                          RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
             return "contribuente/edit";
         }
